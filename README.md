@@ -7,11 +7,11 @@ tcp echo with framing
 
 `params.py` adds the ability to configure the other python files with command-line parameters
 
-`stammerProxy.py` forwards tcp data between two programs but can delay the transmission of data but will ensure all data is eventually forwarded.
+`stammerProxy.py` forwards tcp data between two programs. It may delay the transmission of data but ensures all data will be forwarded, eventually.
 
 Your assignment is to write `fileClient.py` and `fileServer.py` which can transfer a file from a client to the server. Your programs should: 
 
-* work with the proxy
+* work with and without the proxy
 * support multiple clients simultaneously using `fork()`
 * gracefully deal with scenarios such as: 
     * zero length files
