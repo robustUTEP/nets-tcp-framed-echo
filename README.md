@@ -1,13 +1,15 @@
 # nets-tcp-framed-echo
 tcp echo with framing
 
-`framedClient.py` and `framedServer.py` are a TCP client and server which parse data in the form of "number:dataToUpperCase".
+`framedClient.py` and `framedServer.py` are a demonstration TCP client and server which exchange frames consisting of byte arrays in the form payload_length:payload where payload_length is in decimal.   FramedForkServer uses `fork()` to handle multiple simultaneous clients.    
+
+The -? (usage) option prints parameters and default values. 
 
 `framedSock.py` holds the common code used in the client and server including framed send and receive.
 
-`params.py` adds the ability to configure the other python files with command-line parameters
+`params.py` provides functions that assist with parsing and reporting on command-line parameters
 
-`stammerProxy.py` forwards tcp data between two programs. It may delay the transmission of data but ensures all data will be forwarded, eventually.
+`stammerProxy.py` forwards tcp streams. It may delay the transmission of data but ensures all data will be forwarded, eventually.  By default, it listens on port 50000 and forwards to localhost:50001.   Use the -? option for help.
 
 Your assignment is to write `fileClient.py` and `fileServer.py` which can transfer a file from a client to the server. Your programs should: 
 
