@@ -53,16 +53,11 @@ if s is None:
     sys.exit(1)
 
 
-def framedSend(sock, payload):
-     msg = str(len(payload)).encode() + b':' + payload
-     s.send(msg)
-     
-rbuf = b""                      # static receive buffer
+print("sending hello world")
+framedSend(s, b"hello world", debug)
+print("received:", framedReceive(s, debug))
 
-
-framedSend(s, b"hello world")
-print("received:", framedReceive(s))
-
-framedSend(s, b"hello world")
-print("received:", framedReceive(s))
+print("sending hello world")
+framedSend(s, b"hello world", debug)
+print("received:", framedReceive(s, debug))
 

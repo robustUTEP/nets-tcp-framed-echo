@@ -2,7 +2,7 @@
 import sys, re, socket, params
 
 switchesVarDefaults = (
-    (('-l', '--listenPort') ,'listenPort', 50000),
+    (('-l', '--listenPort') ,'listenPort', 50001),
     (('-d', '--debug'), "debug", False), # boolean (set if present)
     (('-?', '--usage'), "usage", False), # boolean (set if present)
     )
@@ -29,9 +29,9 @@ print("connection rec'd from", addr)
 from framedSock import framedSend, framedReceive
 
 while True:
-    payload = framedReceive(sock)
+    payload = framedReceive(sock, debug)
     if debug: print("rec'd: ", payload)
     if not payload:
         break
     payload += b"!"             # make emphatic!
-    framedSend(sock, payload)
+    framedSend(sock, payload, debug)
