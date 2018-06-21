@@ -21,7 +21,7 @@ switchesVarDefaults = (
 progname = "stammerProxy"
 paramMap = params.parseParams(switchesVarDefaults)
 
-server, listenPort, usage, debug, pauseDelay = paramMap["server"], paramMap["listenPort"], paramMap["usage"], paramMap["debug"], int(paramMap["pauseDelay"])
+server, listenPort, usage, debug, pauseDelay = paramMap["server"], paramMap["listenPort"], paramMap["usage"], paramMap["debug"], float(paramMap["pauseDelay"])
 
 if usage:
     params.usage()
@@ -183,9 +183,9 @@ while 1:
                 delayUntil = fwd.delaySendUntil
                 if (delayUntil < nextDelayUntil and delayUntil > now): # minimum active delay
                     nextDelayUntil = delayUntil
-    delay = nextDelayUntil - now
-    if debug: print("delay=%f" % delay)
-    rset, wset, xset = select(list(rmap.keys()), list(wmap.keys()), list(xmap.keys()), delay)
+    maxSleep = nextDelayUntil - now
+    if debug: print("select max sleep=%fs" % maxSleep)
+    rset, wset, xset = select(list(rmap.keys()), list(wmap.keys()), list(xmap.keys()), maxSleep)
     if debug: print([ repr([ sockNames[s] for s in sset]) for sset in [rset,wset,xset] ])
     for sock in rset:
         rmap[sock].doRecv()
