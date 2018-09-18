@@ -2,8 +2,12 @@
 
 # Echo client program
 import socket, sys, re
+
+sys.path.append("../lib")       # for params
 import params
+
 from framedSock import framedSend, framedReceive
+
 
 switchesVarDefaults = (
     (('-s', '--server'), 'server', "127.0.0.1:50001"),
