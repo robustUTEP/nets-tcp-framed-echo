@@ -33,5 +33,5 @@ Your assignment is to write `fileClient.py` and `fileServer.py` which can transf
     * user attempts to transmit a file which does not exist
     * file already exists on the server
     * the client or server unexpectedly disconnect
-* optional: be able to request files from server
+* optional (unless you're taking this course for grad credit): be able to request files from server
 
