@@ -26,6 +26,7 @@ Directory `framed-echo` includes code that implements framing described below
 
 Your assignment is to write `fileClient.py` and `fileServer.py` which can transfer a file ("put") from a client to the server. Your programs should: 
 
+* be in the file-transfer-lab subdir
 * work with and without the proxy
 * support multiple clients simultaneously using `fork()`
 * gracefully deal with scenarios such as: 
