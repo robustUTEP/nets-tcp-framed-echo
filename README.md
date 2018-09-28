@@ -24,7 +24,7 @@ Directory `framed-echo` includes code that implements framing described below
 
 
 
-Your assignment is to write `fileClient.py` and `fileServer.py` which can transfer a file from a client to the server. Your programs should: 
+Your assignment is to write `fileClient.py` and `fileServer.py` which can transfer a file ("put") from a client to the server. Your programs should: 
 
 * work with and without the proxy
 * support multiple clients simultaneously using `fork()`
@@ -33,5 +33,5 @@ Your assignment is to write `fileClient.py` and `fileServer.py` which can transf
     * user attempts to transmit a file which does not exist
     * file already exists on the server
     * the client or server unexpectedly disconnect
-* optional (unless you're taking this course for grad credit): be able to request files from server
+* optional (unless you're taking this course for grad credit): be able to request ("get") files from server
 
