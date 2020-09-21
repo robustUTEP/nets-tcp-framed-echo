@@ -3,6 +3,8 @@
 # Echo server program
 
 import socket, sys, re
+from sockHelpers import sendAll
+
 sys.path.append("../lib")       # for params
 import params
 
@@ -32,8 +34,8 @@ print('Connected by', addr)
 while 1:
     data = conn.recv(1024).decode()
     if not data: break
-    sendMsg = "Echoing %s" % data
-    print("Received '%s', sending '%s'" % (data, sendMsg))
-    conn.send(sendMsg.encode())
+    sendMsg = f"Echoing <{data}>" 
+    print(f"Received <{data}>, sending <{sendMsg}>")
+    sendAll(conn, sendMsg.encode())
 conn.close()
 

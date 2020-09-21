@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+from sockHelpers import sendAll
+
 # Echo client program
 import socket, sys, re
 sys.path.append("../lib")       # for params
@@ -26,40 +28,31 @@ except:
     print("Can't parse server:port from '%s'" % server)
     sys.exit(1)
 
-s = None
-for res in socket.getaddrinfo(serverHost, serverPort, socket.AF_UNSPEC, socket.SOCK_STREAM):
-    af, socktype, proto, canonname, sa = res
-    try:
-        print("creating sock: af=%d, type=%d, proto=%d" % (af, socktype, proto))
-        s = socket.socket(af, socktype, proto)
-    except socket.error as msg:
-        print(" error: %s" % msg)
-        s = None
-        continue
-    try:
-        print(" attempting to connect to %s" % repr(sa))
-        s.connect(sa)
-    except socket.error as msg:
-        print(" error: %s" % msg)
-        s.close()
-        s = None
-        continue
-    break
+addrFamily = socket.AF_INET
+socktype = socket.SOCK_STREAM
+addrPort = (serverHost, serverPort)
+
+s = socket.socket(addrFamily, socktype)
+if s is None:
+    print('could not open socket')
+    sys.exit(1)
+
+s.connect(addrPort)
 
 if s is None:
     print('could not open socket')
     sys.exit(1)
 
-outMessage = "Hello world!"
+outMessage = b"Hello world!"
 
 print("sending '%s'" % outMessage)
-s.send(outMessage.encode())
+sendAll(s, outMessage)
 
 data = s.recv(1024).decode()
 print("Received '%s'" % data)
 
 print("sending '%s'" % outMessage)
-s.send(outMessage.encode())
+sendAll(s, outMessage)
 
 s.shutdown(socket.SHUT_WR)      # no more output
 
